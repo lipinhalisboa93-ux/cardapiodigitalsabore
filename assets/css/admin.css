@@ -1,0 +1,387 @@
+:root {
+    --admin-bg: #070707;
+    --admin-bg-soft: #0f0f0f;
+    --admin-panel: #141414;
+    --admin-panel-2: #1b1b1b;
+    --admin-line: rgba(255,255,255,.1);
+    --admin-text: #f7f7f7;
+    --admin-muted: #b9b9b9;
+    --admin-orange: #ff8a00;
+    --admin-orange-2: #f05a00;
+    --admin-green: #25a35a;
+    --admin-red: #e45a5a;
+    --admin-blue: #57a7ff;
+    --admin-radius: 8px;
+    --admin-shadow: 0 22px 60px rgba(0,0,0,.3);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Inter, "Segoe UI", Arial, Helvetica, sans-serif !important;
+    background:
+        radial-gradient(circle at 20% -10%, rgba(255,138,0,.13), transparent 28rem),
+        linear-gradient(180deg, #111 0%, var(--admin-bg) 42%, #050505 100%) !important;
+    color: var(--admin-text) !important;
+}
+
+a { transition: .18s ease; }
+
+.sidebar {
+    width: 270px !important;
+    background: #090909 !important;
+    border-right: 1px solid var(--admin-line);
+    padding: 24px 18px !important;
+    box-shadow: 14px 0 44px rgba(0,0,0,.2);
+}
+
+.logo {
+    color: #fff !important;
+    font-size: 25px !important;
+    letter-spacing: 0 !important;
+}
+
+.logo::after {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 3px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--admin-orange), var(--admin-orange-2));
+}
+
+.logo-sub {
+    color: var(--admin-muted) !important;
+    margin-top: 12px !important;
+}
+
+.menu {
+    display: grid;
+    gap: 6px;
+}
+
+.menu a,
+.sair a {
+    border: 1px solid transparent !important;
+    border-radius: var(--admin-radius) !important;
+    color: #dedede !important;
+    font-weight: 750;
+}
+
+.menu a:hover,
+.sair a:hover {
+    background: #181818 !important;
+    border-color: rgba(255,138,0,.25) !important;
+    color: #fff !important;
+}
+
+.menu .ativo {
+    background: linear-gradient(135deg, var(--admin-orange), var(--admin-orange-2)) !important;
+    color: #130b03 !important;
+    border-color: transparent !important;
+}
+
+.sair a {
+    background: #101010;
+    border-color: var(--admin-line) !important;
+}
+
+.main {
+    margin-left: 270px !important;
+    max-width: none !important;
+    padding: 34px !important;
+}
+
+.topo,
+.cabecalho {
+    border-bottom: 1px solid var(--admin-line);
+    padding-bottom: 22px;
+    margin-bottom: 26px !important;
+}
+
+.topo h1,
+.cabecalho h1,
+h1 {
+    color: #fff !important;
+    font-size: clamp(28px, 3vw, 38px) !important;
+    line-height: 1.08;
+}
+
+.topo p,
+.cabecalho p,
+.subtitulo,
+.card span {
+    color: var(--admin-muted) !important;
+}
+
+.visualizar,
+.voltar,
+.novo,
+.salvar,
+.alterar-status button,
+button[type="submit"] {
+    border: 0 !important;
+    border-radius: var(--admin-radius) !important;
+    background: linear-gradient(135deg, var(--admin-orange), var(--admin-orange-2)) !important;
+    color: #130b03 !important;
+    font-weight: 900 !important;
+    text-decoration: none !important;
+    box-shadow: 0 12px 26px rgba(240,90,0,.18);
+}
+
+.visualizar:hover,
+.voltar:hover,
+.novo:hover,
+.salvar:hover,
+.alterar-status button:hover,
+button[type="submit"]:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+}
+
+.cards {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+}
+
+.card,
+.secao,
+.form-box,
+.pedido,
+.login-box {
+    background: linear-gradient(180deg, var(--admin-panel), #0f0f0f) !important;
+    border: 1px solid var(--admin-line) !important;
+    border-radius: var(--admin-radius) !important;
+    box-shadow: var(--admin-shadow) !important;
+    color: var(--admin-text) !important;
+}
+
+.card strong {
+    color: #fff;
+    font-size: 34px !important;
+}
+
+.secao-topo,
+.pedido-topo {
+    background: #101010 !important;
+    border-bottom: 1px solid var(--admin-line) !important;
+}
+
+.secao-topo h2,
+.card h2,
+.bloco h3 {
+    color: #fff !important;
+}
+
+.tabela-container,
+.tabela,
+table {
+    color: var(--admin-text) !important;
+}
+
+th,
+.tabela th {
+    background: #101010 !important;
+    color: #d7d7d7 !important;
+    border-bottom: 1px solid var(--admin-line) !important;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+td,
+.tabela td {
+    border-bottom: 1px solid var(--admin-line) !important;
+}
+
+tr:hover td {
+    background: rgba(255,255,255,.025);
+}
+
+.produto-img,
+.sem-imagem,
+.preview img {
+    border-radius: var(--admin-radius) !important;
+    border: 1px solid var(--admin-line) !important;
+    background: #0b0b0b !important;
+}
+
+.nome-produto,
+.nome,
+.preco,
+.numero-pedido,
+.info strong,
+.item strong,
+.total {
+    color: #fff !important;
+}
+
+.editar,
+.cancelar {
+    background: #222 !important;
+    color: #fff !important;
+    border: 1px solid var(--admin-line);
+}
+
+.excluir {
+    background: rgba(228,90,90,.16) !important;
+    color: #ff9a9a !important;
+    border: 1px solid rgba(228,90,90,.25);
+}
+
+.status,
+.quantidade,
+.ativo-status,
+.inativo-status {
+    border-radius: 999px !important;
+    border: 1px solid var(--admin-line);
+}
+
+.ativo-status,
+.status-recebido {
+    background: rgba(37,163,90,.16) !important;
+    color: #8ff0b6 !important;
+}
+
+.status-preparacao {
+    background: rgba(255,138,0,.16) !important;
+    color: #ffbd74 !important;
+}
+
+.status-pronto {
+    background: rgba(87,167,255,.16) !important;
+    color: #9dccff !important;
+}
+
+.status-entrega {
+    background: rgba(168,120,255,.16) !important;
+    color: #cdb6ff !important;
+}
+
+.status-finalizado {
+    background: rgba(255,255,255,.12) !important;
+    color: #eee !important;
+}
+
+.inativo-status {
+    background: rgba(228,90,90,.16) !important;
+    color: #ff9a9a !important;
+}
+
+.status-box,
+.logo-atual,
+.quantidade {
+    background: #111 !important;
+    color: var(--admin-muted) !important;
+    border: 1px solid var(--admin-line) !important;
+}
+
+label {
+    color: #f3f3f3 !important;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+select,
+textarea,
+input[type="file"] {
+    width: 100%;
+    border: 1px solid var(--admin-line) !important;
+    border-radius: var(--admin-radius) !important;
+    background: #0b0b0b !important;
+    color: #fff !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #787878;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none !important;
+    border-color: var(--admin-orange) !important;
+    box-shadow: 0 0 0 3px rgba(255,138,0,.14);
+}
+
+.erro {
+    background: rgba(228,90,90,.16) !important;
+    border: 1px solid rgba(228,90,90,.34) !important;
+    color: #ffc1c1 !important;
+}
+
+.sucesso,
+.mensagem {
+    background: rgba(37,163,90,.16) !important;
+    border: 1px solid rgba(37,163,90,.34) !important;
+    color: #b8f2cc !important;
+}
+
+.pedido-corpo {
+    background: #111;
+}
+
+.info,
+.data-pedido,
+.item,
+.ajuda {
+    color: var(--admin-muted) !important;
+}
+
+.sabor-item-pedido {
+    display: block;
+    margin-top: 4px;
+    color: #ffbd74;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.alterar-status,
+.total,
+.acoes {
+    border-color: var(--admin-line) !important;
+}
+
+.login-box {
+    padding: 34px !important;
+}
+
+.container {
+    margin-top: 8vh !important;
+}
+
+.voltar a {
+    color: var(--admin-orange) !important;
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .menu {
+        display: flex !important;
+        overflow-x: auto;
+        padding-bottom: 6px;
+    }
+
+    .main {
+        margin-left: 0 !important;
+        padding: 20px !important;
+    }
+
+    .topo {
+        align-items: flex-start !important;
+    }
+
+    .conteudo,
+    .grid,
+    .pedido-corpo {
+        grid-template-columns: 1fr !important;
+    }
+}
