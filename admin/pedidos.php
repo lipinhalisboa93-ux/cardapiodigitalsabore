@@ -326,15 +326,6 @@ body {
 
 .alterar-status button:hover { background: #333; }
 
-.sem-pedidos {
-    background: white;
-    padding: 50px 20px;
-    text-align: center;
-    border-radius: 10px;
-    border: 1px solid #e5e5e5;
-    color: #777;
-}
-
 @media (max-width: 800px) {
     .sidebar {
         position: relative;
@@ -413,13 +404,22 @@ body {
 
     <?php if (count($pedidos) === 0): ?>
 
-        <div class="sem-pedidos">
+        <div class="estado-vazio">
 
-            <div style="font-size:45px; margin-bottom:10px;">
-                🛒
+            <div class="estado-vazio-icone" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="20" r="1.4"/>
+                    <circle cx="18" cy="20" r="1.4"/>
+                    <path d="M2.5 3.5h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.2l1.7-7.3H6.2"/>
+                </svg>
             </div>
 
-            Nenhum pedido recebido até o momento.
+            <h2>Nenhum pedido recebido</h2>
+
+            <p>
+                Quando um cliente finalizar uma compra pelo cardápio digital,
+                o pedido aparecerá aqui para você acompanhar e atualizar o status.
+            </p>
 
         </div>
 

@@ -170,10 +170,10 @@ if (($_GET['formato'] ?? '') === 'json') {
 </head>
 <body>
 
-<header class="hero hero-acompanhamento">
+<header class="hero hero-cardapio hero-acompanhamento">
     <div class="hero-conteudo">
-        <div class="logo-sabore-wrap">
-            <img src="assets/logo-sabore.jpg" alt="Saborê" class="logo-sabore">
+        <div class="logo-sabore-wrap logo-integrado">
+            <img src="assets/logo-sabore.png" alt="Saborê" class="logo-sabore" width="985" height="517">
         </div>
         <p>Acompanhe o andamento do seu pedido.</p>
     </div>

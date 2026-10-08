@@ -17,12 +17,28 @@
 
 * { box-sizing: border-box; }
 
+/* Fundo da página inteira: evita que o degradê se repita em páginas curtas */
+html {
+    background: #050505;
+}
+
 body {
+    min-height: 100vh;
     margin: 0;
     font-family: Inter, "Segoe UI", Arial, Helvetica, sans-serif !important;
+    /* Degradê com transição gradual (sem quebra brusca de tom) */
     background:
-        radial-gradient(circle at 20% -10%, rgba(255,138,0,.13), transparent 28rem),
-        linear-gradient(180deg, #111 0%, var(--admin-bg) 42%, #050505 100%) !important;
+        radial-gradient(circle at 20% -10%, rgba(255,138,0,.13), rgba(255,138,0,.055) 15rem, transparent 28rem),
+        linear-gradient(180deg,
+            rgb(17 17 17) 0%,
+            rgb(14.6 14.6 14.6) 10%,
+            rgb(12.3 12.3 12.3) 20%,
+            rgb(10.2 10.2 10.2) 30%,
+            rgb(8.4 8.4 8.4) 40%,
+            rgb(7.1 7.1 7.1) 50%,
+            rgb(6.1 6.1 6.1) 65%,
+            rgb(5.5 5.5 5.5) 80%,
+            rgb(5 5 5) 100%) !important;
     color: var(--admin-text) !important;
 }
 
@@ -341,8 +357,124 @@ textarea:focus {
 
 .alterar-status,
 .total,
+.item,
 .acoes {
     border-color: var(--admin-line) !important;
+}
+
+/* =========================
+   ESTADO VAZIO (pedidos / dashboard)
+========================= */
+
+.estado-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 56px 24px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--admin-panel), #0f0f0f);
+    border: 1px solid var(--admin-line);
+    border-radius: var(--admin-radius);
+    box-shadow: var(--admin-shadow);
+}
+
+.estado-vazio-icone {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255,138,0,.28);
+    border-radius: 999px;
+    background: rgba(255,138,0,.1);
+    color: var(--admin-orange);
+}
+
+.estado-vazio h2,
+.estado-vazio h3 {
+    margin: 0 0 8px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.estado-vazio p {
+    max-width: 46ch;
+    margin: 0;
+    color: var(--admin-muted);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.estado-vazio-compacto {
+    padding: 38px 20px;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.estado-vazio-compacto .estado-vazio-icone {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 14px;
+}
+
+.estado-vazio-compacto h3 { font-size: 17px; }
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.grupo-titulo {
+    margin: 0 0 12px;
+    color: var(--admin-muted);
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.card small {
+    display: block;
+    margin-top: 8px;
+    color: #8a8a8a;
+    font-size: 12px;
+}
+
+.card-destaque {
+    border-color: rgba(255,138,0,.38) !important;
+}
+
+.secao-recentes {
+    margin-bottom: 30px;
+}
+
+.secao-recentes .secao-topo {
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.ver-todos {
+    padding: 9px 14px;
+    border: 1px solid rgba(255,138,0,.38);
+    border-radius: var(--admin-radius);
+    color: #ffbd74;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.ver-todos:hover {
+    border-color: var(--admin-orange);
+    color: #fff;
+}
+
+.numero-recente {
+    color: #fff;
+    font-weight: 900;
+}
+
+.data-recente {
+    color: var(--admin-muted);
+    white-space: nowrap;
 }
 
 .login-box {
@@ -383,5 +515,17 @@ textarea:focus {
     .grid,
     .pedido-corpo {
         grid-template-columns: 1fr !important;
+    }
+
+    /* Permite que os blocos da grade encolham até a largura da tela
+       (tabelas largas rolam dentro do próprio bloco, não a página inteira) */
+    .conteudo > *,
+    .grid > *,
+    .pedido-corpo > * {
+        min-width: 0;
+    }
+
+    .estado-vazio {
+        padding: 40px 18px;
     }
 }

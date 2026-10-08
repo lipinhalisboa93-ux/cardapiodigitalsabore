@@ -119,9 +119,9 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
      CABEÇALHO
 ========================= -->
 
-<header class="hero">
+<header class="hero hero-cardapio">
     <div class="hero-conteudo">
-        <div class="logo-sabore-wrap"><img src="assets/logo-sabore.jpg" alt="Saborê" class="logo-sabore"></div>
+        <div class="logo-sabore-wrap logo-integrado"><img src="assets/logo-sabore.png" alt="Saborê" class="logo-sabore" width="985" height="517"></div>
         <p><?= htmlspecialchars($config['descricao']) ?></p>
         <?php if (!empty($config['horario'])): ?>
             <div class="hero-horario">Horário: <?= htmlspecialchars($config['horario']) ?></div>

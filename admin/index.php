@@ -32,6 +32,34 @@ $pedidosPreparacao = $pdo->query(
     "SELECT COUNT(*) FROM pedidos WHERE status = 'Em preparação'"
 )->fetchColumn();
 
+// Pedidos prontos
+$pedidosProntos = $pdo->query(
+    "SELECT COUNT(*) FROM pedidos WHERE status = 'Pronto'"
+)->fetchColumn();
+
+// Pedidos recentes (resumo)
+$pedidosRecentes = $pdo->query(
+    "SELECT id, nome_cliente, total, status, criado_em
+     FROM pedidos
+     ORDER BY criado_em DESC, id DESC
+     LIMIT 5"
+)->fetchAll(PDO::FETCH_ASSOC);
+
+// Mesmas cores de status usadas na página de pedidos
+function classeStatusResumo(string $status): string
+{
+    if (str_starts_with($status, 'Em prepara')) {
+        return 'status-preparacao';
+    }
+
+    return match ($status) {
+        'Pronto' => 'status-pronto',
+        'Saiu para entrega' => 'status-entrega',
+        'Finalizado' => 'status-finalizado',
+        default => 'status-recebido',
+    };
+}
+
 // Lista de produtos
 $sql = "
     SELECT 
@@ -514,7 +542,68 @@ tr:last-child td {
     </div>
 
 
-    <!-- CARDS -->
+    <!-- CARDS: PEDIDOS -->
+
+    <h2 class="grupo-titulo">Pedidos</h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <span>
+                Pedidos recebidos
+            </span>
+
+            <strong>
+                <?= $totalPedidos ?>
+            </strong>
+
+        </div>
+
+        <div class="card card-destaque">
+
+            <span>
+                Faturamento
+            </span>
+
+            <strong>
+                R$ <?= number_format((float)$faturamentoTotal, 2, ',', '.') ?>
+            </strong>
+
+            <small>Soma de todos os pedidos registrados</small>
+
+        </div>
+
+        <div class="card">
+
+            <span>
+                Em preparação
+            </span>
+
+            <strong>
+                <?= $pedidosPreparacao ?>
+            </strong>
+
+        </div>
+
+        <div class="card">
+
+            <span>
+                Prontos
+            </span>
+
+            <strong>
+                <?= $pedidosProntos ?>
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARDS: CARDÁPIO -->
+
+    <h2 class="grupo-titulo">Cardápio</h2>
 
     <div class="cards">
 
@@ -554,43 +643,94 @@ tr:last-child td {
 
         </div>
 
-        <div class="card">
-
-            <span>
-                Pedidos recebidos
-            </span>
-
-            <strong>
-                <?= $totalPedidos ?>
-            </strong>
-
-        </div>
-
-        <div class="card">
-
-            <span>
-                Faturamento
-            </span>
-
-            <strong>
-                R$ <?= number_format((float)$faturamentoTotal, 2, ',', '.') ?>
-            </strong>
-
-        </div>
-
-        <div class="card">
-
-            <span>
-                Em preparação
-            </span>
-
-            <strong>
-                <?= $pedidosPreparacao ?>
-            </strong>
-
-        </div>
-
     </div>
+
+
+    <!-- PEDIDOS RECENTES -->
+
+    <section class="secao secao-recentes">
+
+        <div class="secao-topo">
+
+            <h2>
+                Pedidos recentes
+            </h2>
+
+            <a href="pedidos.php" class="ver-todos">
+                Ver todos os pedidos
+            </a>
+
+        </div>
+
+        <?php if (count($pedidosRecentes) === 0): ?>
+
+            <div class="estado-vazio estado-vazio-compacto">
+
+                <div class="estado-vazio-icone" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="20" r="1.4"/>
+                        <circle cx="18" cy="20" r="1.4"/>
+                        <path d="M2.5 3.5h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.2l1.7-7.3H6.2"/>
+                    </svg>
+                </div>
+
+                <h3>Nenhum pedido recebido</h3>
+
+                <p>Os pedidos mais recentes do cardápio aparecerão aqui.</p>
+
+            </div>
+
+        <?php else: ?>
+
+            <div class="tabela-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Pedido</th>
+                            <th>Cliente</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th>Data/hora</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <?php foreach ($pedidosRecentes as $pedidoRecente): ?>
+
+                        <tr>
+                            <td class="numero-recente">#<?= (int)$pedidoRecente['id'] ?></td>
+
+                            <td><?= htmlspecialchars($pedidoRecente['nome_cliente']) ?></td>
+
+                            <td class="preco">
+                                R$ <?= number_format((float)$pedidoRecente['total'], 2, ',', '.') ?>
+                            </td>
+
+                            <td>
+                                <span class="status <?= classeStatusResumo($pedidoRecente['status']) ?>">
+                                    <?= htmlspecialchars($pedidoRecente['status']) ?>
+                                </span>
+                            </td>
+
+                            <td class="data-recente">
+                                <?= date('d/m/Y H:i', strtotime($pedidoRecente['criado_em'])) ?>
+                            </td>
+                        </tr>
+
+                    <?php endforeach; ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        <?php endif; ?>
+
+    </section>
 
 
     <!-- PRODUTOS -->
